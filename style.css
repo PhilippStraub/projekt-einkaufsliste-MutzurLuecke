@@ -6,12 +6,12 @@ body{
     display: grid;
     height: 100%;
     width: 100%;
-    grid-template-columns: 200px auto;
+    grid-template-columns: 230px auto;
     grid-template-rows: 15vh minmax(85vh, auto);
     grid-template-areas: 
     'header header'
     'menu main';
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 menu{
@@ -29,3 +29,18 @@ main{
     background-color: #EBEBEB;
 }
 
+#hleft{
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+#bhleft{
+    text-align: left;
+    margin-left: 85px;
+    margin-top: 2px;
+    font-size: 80%;
+    font-weight: lighter;
+}

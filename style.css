@@ -44,3 +44,20 @@ main{
     font-size: 80%;
     font-weight: lighter;
 }
+
+#plus{
+    width: 15px;
+    height: auto;
+    margin-left: 50px;
+}
+
+#addlist{
+    margin-top: 200%;
+    vertical-align: bottom;
+    margin-left:10px;
+}
+
+#plus:hover{
+    -webkit-transform: scale(1.5,1.5);
+    -webkit-transition: all 0.3s ease-in-out;
+}

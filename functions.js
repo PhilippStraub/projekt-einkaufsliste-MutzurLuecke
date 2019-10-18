@@ -20,8 +20,8 @@ function home(){
 
     //Neue Elemente anzeigen
     var newElement = document.createElement("div");
-	newElement.innerHTML = "<div><h4>Test</h4></div>";
-    newElement.className = "class1"
+	newElement.innerHTML = '<div class="start" id="begrüßung"><h1>Herzliche willkommen zu deiner Lieblings ToDo-App</h1><h3>Mit diesem lblblblblblblblbllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</h3></div><div class="start" id="tutorial"><h1 id="tut">Wie funktionert das Ganze?</h1><h3 id="tutu">Nachdem du deine API erhalten hast kannst du auf dem kleinen  Feld links unten eine neue Liste erstellen. Du musst nur den Key in das Textfeld kopieren und schon kannst du in deiner neuen Liste ToDos hinzufügen, als fertig gestellt markieren oder löschen.</h3></div>';
+    newElement.className = "class1";
     document.getElementById("main").appendChild(newElement);
 
     var c1 = document.getElementById("main").childNodes;

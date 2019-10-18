@@ -11,12 +11,15 @@
 </head>
 <body>
     <header>
-        <div id="hleft">
-            <h2>Meine Listen</h2>
+        <div id="heading" onclick="home()">
+            <div id="hleft">
+                <h2>Meine Listen</h2>
+            </div>
+            <div id="bhleft">
+                <h4>Mut zur Lücke</h4>
+            </div>
         </div>
-        <div id="bhleft">
-            <h4>Mut zur Lücke</h4>
-        </div>
+        
 
     </header>
     <menu>
@@ -24,15 +27,26 @@
             <div class="liste">
                 Liste1
             </div>
+            <div class="liste">
+                    Liste1
+            </div>
+            
             <div id="addlist">
-                Liste hinzufügen <img src="plus.png" id="plus" alt="" onclick="addlist()">
+                <span id="addlisttext">Liste hinzufügen</span>
+                <img src="plus.png" id="plus" alt="" onclick="addlist()">
             </div>
         </div>
         
     </menu>
 
-    <main>
+    <main id="main">
+        <div id="">
+            
 
+
+
+
+        </div>
     </main>
     <script type="text/javascript" src="functions.js"></script>
 </body>

@@ -1,9 +1,17 @@
 function addlist(){
-    var eingabe = prompt("Bitte den Namen der Liste eingeben:", "Listname");
+    var eingabe = prompt("Bitte die ID der Liste eingeben:", "ID");
     if(eingabe != ""){
-        //HTTP Get request
-        var newlist = document.createElement("div")
-        newElement.innerHTML
+
+        if(listElements() == true){
+            elementAnlegen(eingabe);
+            
+        } else {
+            //letztes Element bzw Liste löschen
+            document.querySelector("div");
+            document.getElementById("elemente").parentNode.removeChild('div class="liste" onclick="list()"');
+            elementAnlegen(eingabe);
+        }
+
     } else{
         alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
     }
@@ -23,7 +31,7 @@ function home(){
     //Neue Elemente anzeigen
     var newElement = document.createElement("div");
 	newElement.innerHTML = '<div class="start" id="begrüßung"><h1>Herzliche willkommen zu deiner Lieblings ToDo-App</h1><h3>Mit diesem lblblblblblblblbllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</h3></div><div class="start" id="tutorial"><h1 id="tut">Wie funktionert das Ganze?</h1><h3 id="tutu">Nachdem du deine API erhalten hast kannst du auf dem kleinen  Feld links unten eine neue Liste erstellen. Du musst nur den Key in das Textfeld kopieren und schon kannst du in deiner neuen Liste ToDos hinzufügen, als fertig gestellt markieren oder löschen.</h3></div>';
-    newElement.className = "class1";
+    newElement.className = "mainframe";
     document.getElementById("main").appendChild(newElement);
 
     var c1 = document.getElementById("main").childNodes;
@@ -32,6 +40,32 @@ function home(){
     console.log(e2);
 }
 
+function list(){
+    var newElement = document.createElement("div");
+	newElement.innerHTML = "<div><h4>Test</h4></div>";
+    newElement.className = "mainframe";
+    document.getElementById("main").appendChild(newElement);
+    
+}
+
+function listElements(){
+    var count = document.getElementById("elemente").childElementCount;
+    if(count < 10){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function elementAnlegen(eingabe){
+    //HTTP Get request
+            
+    var newElement = document.createElement("div");
+    newElement.innerHTML = '<div onclick="list()">' + eingabe + '</div>';
+    newElement.className = "liste";
+    document.getElementById("elemente").appendChild(newElement);
+
+}
 /*
 function add(){
     var newElement = document.createElement("div");

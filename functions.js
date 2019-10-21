@@ -5,6 +5,8 @@ function addlist(){
         var req = fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/5da965bba83b600017fd5c0b");
         console.log(req);
                          
+        var newlist = document.createElement("div")
+        newElement.innerHTML
     } else{
         alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
     }

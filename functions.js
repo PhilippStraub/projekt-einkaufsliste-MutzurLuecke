@@ -1,25 +1,31 @@
 function addlist(){
     var eingabe = prompt("Bitte die ID der Liste eingeben:", "ID");
     if(eingabe != ""){
-        if(listElements() == true){
-            fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/5da965bba83b600017fd5c0b").then(
-             function (antwort) {
-             return antwort.json(); 
-             }).then(
-             function (json) {
-             console.log(json["name"]);
-             console.log(json["items"][0]["name"]);
-                });
+           
+    //Inhalt löschen
+    const e1 = document.getElementById("main");
+    while (e1.firstChild) {
+    e1.removeChild(e1.firstChild);
+    }
 
-                
-            elementAnlegen(eingabe);
-            
-        } else {
-            //letztes Element bzw Liste löschen
-            document.querySelector("div");
-            document.getElementById("elemente").parentNode.removeChild('div class="liste" onclick="list()"');
-            elementAnlegen(eingabe);
-        }
+    //HTTP Get request
+    fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/5da965bba83b600017fd5c0b").then(
+    function (antwort) {
+    return antwort.json(); 
+    }).then(
+    function (json) {
+    console.log(json["name"]);
+    console.log(json["items"][0]["name"]);
+    });
+
+    //Neues Element in linke Spalte erstellen      
+    var newElement = document.createElement("div");
+    newElement.innerHTML = '<div onclick="list()">' + eingabe + '</div>';
+    newElement.className = "liste";
+    document.getElementById("elemente").appendChild(newElement);
+
+    //Inhalt erstellen
+
 
     } else{
         alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
@@ -64,24 +70,7 @@ function list(){
     
 }
 
-function listElements(){
-    var count = document.getElementById("elemente").childElementCount;
-    if(count < 10){
-        return true;
-    } else {
-        return false;
-    }
-}
 
-function elementAnlegen(eingabe){
-    //HTTP Get request
-            
-    var newElement = document.createElement("div");
-    newElement.innerHTML = '<div onclick="list()">' + eingabe + '</div>';
-    newElement.className = "liste";
-    document.getElementById("elemente").appendChild(newElement);
-
-}
 /*
 function add(){
     var newElement = document.createElement("div");

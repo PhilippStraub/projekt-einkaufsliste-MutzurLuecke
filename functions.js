@@ -2,11 +2,18 @@ function addlist(){
     var eingabe = prompt("Bitte den Namen der Liste eingeben:", "Listname");
     if(eingabe != ""){
         //HTTP Get request
-        var req = fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/5da965bba83b600017fd5c0b");
-        console.log(req);
-                         
-        var newlist = document.createElement("div")
-        newElement.innerHTML
+        
+       
+        fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/5da965bba83b600017fd5c0b").then(
+        function (antwort) {
+        return antwort.json(); 
+        }).then(
+        function (json) {
+        console.log(json["name"]);
+        console.log(json["items"][0]["name"]);
+  }
+);
+       
     } else{
         alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
     }

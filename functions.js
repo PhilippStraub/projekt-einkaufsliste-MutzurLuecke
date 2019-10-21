@@ -41,6 +41,13 @@ function home(){
 }
 
 function list(){
+    //Elemente davor entfernen
+    const e1 = document.getElementById("main");
+    while (e1.firstChild) {
+    e1.removeChild(e1.firstChild);
+    }
+
+    //Neue Elemente anzeigen
     var newElement = document.createElement("div");
 	newElement.innerHTML = "<div><h4>Test</h4></div>";
     newElement.className = "mainframe";

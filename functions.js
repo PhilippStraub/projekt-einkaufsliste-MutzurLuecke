@@ -3,6 +3,7 @@ function addlist(){
     if(eingabe != null){
         if(eingabe != ""){
             
+            
             fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/"+eingabe).then(
                 function (antwort) {
                 return antwort.json(); 
@@ -27,9 +28,14 @@ function addlist(){
 
             document.getElementById("elemente").appendChild(newElement);
             showlist(eingabe);
-                
+            
+            
+
+
 
             });
+
+            
             
         } else{
             alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
@@ -66,6 +72,7 @@ function showlist(id){
 
             }
         )
+        
 }
 
 function home(){

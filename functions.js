@@ -24,7 +24,6 @@ function addlist(){
 
                 
                 
-                //newElement.innerHTML = '<div class="liste" onclick="showlist('+eingabe+')>' + nameListe + '</div>';
 
             document.getElementById("elemente").appendChild(newElement);
             showlist(eingabe);

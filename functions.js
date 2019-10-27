@@ -95,11 +95,13 @@ function showlist(id){
 
                             for (i = 0; i < Object.keys(json.items).length; i++){
                                 var items = json["items"][i]["name"];
+                                var id = json["items"][i]["_id"];
                                 var newElement = document.createElement("div");
                                 newElement.className = "item";
+                                newElement.id = id;
                                 newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items;
+                                console.log(items);
                                 document.getElementById("mainframe").appendChild(newElement);
-                                
                             }
                         })                 
                 });
@@ -107,9 +109,12 @@ function showlist(id){
 
                 for (i = 0; i < Object.keys(json.items).length; i++){
                     var items = json["items"][i]["name"];
+                    var id = json["items"][i]["_id"];
                     var newElement = document.createElement("div");
                     newElement.className = "item";
+                    newElement.id = id;
                     newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items;
+                    console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
                     
                 }

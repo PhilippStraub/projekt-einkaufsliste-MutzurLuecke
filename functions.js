@@ -2,11 +2,14 @@ function addlist(){
     var eingabe = prompt("Bitte die ID der Liste eingeben:", "ID");
     if(eingabe != null){
         if(eingabe != ""){
-            
-            
             fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/"+eingabe).then(
                 function (antwort) {
-                return antwort.json(); 
+                    if(antwort.status == 200){
+                        return antwort.json();
+                    } else {
+                        alert("Fehler aufgetreten:" + antwort.status);
+                        throw new Error("Fehler aufgetreten:" + antwort.status);
+                    }
                 }).then(
                 function (json) {
                 console.log(json["name"]);
@@ -14,7 +17,7 @@ function addlist(){
                 var newElement = document.createElement("div");
                 newElement.innerHTML = nameListe;
                 newElement.className = 'liste';
-                newElement.id = json._id; 
+                newElement.id = json._id;
                 newElement.addEventListener('click',
                 function(event) {
                     console.log(event.target.id);

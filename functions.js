@@ -12,7 +12,6 @@ function addlist(){
                     }
                 }).then(
                 function (json) {
-                console.log(json["name"]);
                 var nameListe = json["name"];
                 var newElement = document.createElement("div");
                 newElement.innerHTML = nameListe;
@@ -20,7 +19,6 @@ function addlist(){
                 newElement.id = json._id;
                 newElement.addEventListener('click',
                 function(event) {
-                    console.log(event.target.id);
                     showlist(event.target.id);
                 });
                 
@@ -62,19 +60,61 @@ function showlist(id){
                 while (e1.firstChild) {
                 e1.removeChild(e1.firstChild);
                 }
+                var newHinzufuegen = document.createElement("div");
+                newHinzufuegen.className = "item";
+                newHinzufuegen.id = "additem";
+                newHinzufuegen.innerHTML = 'Item hinzufügen';
+                newHinzufuegen.liste = json._id;
+                //Request
+                newHinzufuegen.addEventListener('click',
+                function(event) {
+                    var eingabe = prompt("Bitte Namen des neuen Elements eingeben", "Name");
+                    fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + json._id + "/items",
+                        {
+                            headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                            },
+                            method: "POST",
+                            body: JSON.stringify({name: eingabe})
+                        }).then(
+                            function(res){
+                            return res.json();
+                        }).then(
+                            function(json){
+                            const e1 = document.getElementById("mainframe");
+                            while (e1.firstChild) {
+                            e1.removeChild(e1.firstChild);
+                            }
+                            var newHinzufuegen = document.createElement("div");
+                            newHinzufuegen.className = "item";
+                            newHinzufuegen.id = "additem";
+                            newHinzufuegen.innerHTML = 'Item hinzufügen';
+                            newHinzufuegen.liste = json._id;
+                            document.getElementById("mainframe").appendChild(newHinzufuegen);
+
+                            for (i = 0; i < Object.keys(json.items).length; i++){
+                                var items = json["items"][i]["name"];
+                                var newElement = document.createElement("div");
+                                newElement.className = "item";
+                                newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items;
+                                document.getElementById("mainframe").appendChild(newElement);
+                                
+                            }
+                        })                 
+                });
+                document.getElementById("mainframe").appendChild(newHinzufuegen);
+
                 for (i = 0; i < Object.keys(json.items).length; i++){
                     var items = json["items"][i]["name"];
                     var newElement = document.createElement("div");
                     newElement.className = "item";
-
-
                     newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items;
                     document.getElementById("mainframe").appendChild(newElement);
+                    
                 }
-
             }
-        )
-        
+        )     
 }
 
 function home(){

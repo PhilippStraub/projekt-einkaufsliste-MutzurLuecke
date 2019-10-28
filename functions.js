@@ -71,7 +71,7 @@ function showlist(id){
                 function adding(event) {
                     var eingabe = prompt("Bitte Namen des neuen Elements eingeben", "Name");
                     if(eingabe != null){
-                        if(eingabe != ""){
+                        if(eingabe != "" && eingabe != "Name"){
                             fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + json._id + "/items",
                             {
                                 headers: {
@@ -104,10 +104,9 @@ function showlist(id){
                     var newElement = document.createElement("div");
                     newElement.className = "item";
                     newElement.id = id;
-                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '<img src=trash.png id="trash" onclick="deleteElement(' + json._id + ',' + id + ')" alt="Entfernen">';
+                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '<img src=trash.png id="trash" onclick="deleteElement(' + String(json._id) + ',' + String(id) + ')" alt="Entfernen">';
                     console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
-                    
                 }
             }
         )     

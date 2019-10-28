@@ -11,7 +11,7 @@ body{
     grid-template-columns: 230px auto;
     grid-template-rows: 13vh minmax(87vh, auto);
     grid-template-areas: 
-    'header header'
+    'menu header'
     'menu main';
     font-family: 'Montserrat', sans-serif;
     overflow-y: scroll;
@@ -84,9 +84,7 @@ main{
     -webkit-transition: all 0.3s ease-in-out;
 }
 
-#heading{
-    margin-right:85%;
-}
+
 
 #heading:hover{
 }

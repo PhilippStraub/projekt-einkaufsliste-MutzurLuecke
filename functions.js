@@ -104,7 +104,7 @@ function showlist(id){
                     var newElement = document.createElement("div");
                     newElement.className = "item";
                     newElement.id = id;
-                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '<img src=trash.png id="trash" onclick="deleteElement(' + json._id + ',' + id + ')" alt="Entfernen">';
+                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '<img src=trash.png id="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
                     console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
                     

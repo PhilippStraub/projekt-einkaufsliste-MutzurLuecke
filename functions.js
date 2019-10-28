@@ -46,6 +46,7 @@ function addlist(){
 }
 
 function showlist(id){
+    console.log(id);
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/"+id).then(
         function(antwort){
             return antwort.json();
@@ -67,43 +68,33 @@ function showlist(id){
                 newHinzufuegen.liste = json._id;
                 //Request
                 newHinzufuegen.addEventListener('click',
-                function(event) {
+                function adding(event) {
                     var eingabe = prompt("Bitte Namen des neuen Elements eingeben", "Name");
-                    fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + json._id + "/items",
-                        {
-                            headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                            },
-                            method: "POST",
-                            body: JSON.stringify({name: eingabe})
-                        }).then(
-                            function(res){
-                            return res.json();
-                        }).then(
-                            function(json){
-                            const e1 = document.getElementById("mainframe");
-                            while (e1.firstChild) {
-                            e1.removeChild(e1.firstChild);
-                            }
-                            var newHinzufuegen = document.createElement("div");
-                            newHinzufuegen.className = "item";
-                            newHinzufuegen.id = "additem";
-                            newHinzufuegen.innerHTML = 'Item hinzufügen';
-                            newHinzufuegen.liste = json._id;
-                            document.getElementById("mainframe").appendChild(newHinzufuegen);
+                    if(eingabe != null){
+                        if(eingabe != ""){
+                            fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + json._id + "/items",
+                            {
+                                headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                                },
+                                method: "POST",
+                                body: JSON.stringify({name: eingabe})
+                            }).then(
+                                function(res){
+                                return res.json();
+                            }).then(
+                                function(event) {
+                                    showlist(json._id);
+                                }
+                            )  
 
-                            for (i = 0; i < Object.keys(json.items).length; i++){
-                                var items = json["items"][i]["name"];
-                                var id = json["items"][i]["_id"];
-                                var newElement = document.createElement("div");
-                                newElement.className = "item";
-                                newElement.id = id;
-                                newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items;
-                                console.log(items);
-                                document.getElementById("mainframe").appendChild(newElement);
-                            }
-                        })                 
+                        }else{
+                            alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
+                        }
+                    }else{
+
+                    }                  
                 });
                 document.getElementById("mainframe").appendChild(newHinzufuegen);
 
@@ -113,7 +104,7 @@ function showlist(id){
                     var newElement = document.createElement("div");
                     newElement.className = "item";
                     newElement.id = id;
-                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items;
+                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '';
                     console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
                     

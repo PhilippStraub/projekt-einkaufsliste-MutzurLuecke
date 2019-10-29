@@ -1,7 +1,13 @@
-var apikey = "a3f48db84af0037bac2c9ad2fd5fbf88";
+var apikey = null;
 var listen = [null];
 var zähler = 0;
 aktiveListen();
+document.getElementById("benutzer").value = "Einloggen..";
+
+setInterval(function (){
+    var btns = header.getElementsByClassName("liste");
+    markieren();
+}, 1000);
 
 function aktiveListen(){
     
@@ -49,6 +55,8 @@ function addListe(eingabe){
         newElement.id = json._id;
         newElement.addEventListener('click',
         function(event) {
+            btns = header.getElementsByClassName("liste");
+            markieren();
             showlist(event.target.id);
         });
         /*
@@ -71,9 +79,6 @@ function addListe(eingabe){
 
 
     });
-    btns = header.getElementsByClassName("liste");
-    console.log(btns);
-    markieren();
     
 
 }
@@ -102,6 +107,7 @@ function showlist(id){
                 //Request
                 newHinzufuegen.addEventListener('click',
                 function adding(event) {
+                    
                     var eingabe = prompt("Bitte Namen des neuen Elements eingeben", "Name");
                     if(eingabe != null){
                         if(eingabe != "" && eingabe != "Name"){
@@ -219,57 +225,110 @@ function deleteListe(liste){
 }
 
 function listeErstellen(){
-    var eingabe = document.getElementById("eingabefeld").value;
-    if(eingabe != ""){
-        fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists",
-        {
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': apikey
-            },
-            method: "POST",
-            body: JSON.stringify({name: eingabe})
-        }).then(
-            function(res){
-            return res.json();
-        }).then(
-            function(json) {
-                var eingabe = prompt('Eine neue Liste: "'+ json.name + '" wurde erstellt:', json._id);
-                console.log('Eine neue Liste: "'+ json.name + '" wurde erstellt: ' + json._id);
-                if(eingabe != null){
-                    if(eingabe != ""){
-                        addListe(eingabe);
-                    } else{
-                        alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
-                    }
-                }else{
-                    
-                }
-            }
-        ) 
+    if(apikey==null){
+        alert("Bitte einloggen.");
         document.getElementById("eingabefeld").value = "";
-        
-        
-    } else{
+    }else{
+        var eingabe = document.getElementById("eingabefeld").value;
+        if(eingabe != ""){
+            fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists",
+            {
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': apikey
+                },
+                method: "POST",
+                body: JSON.stringify({name: eingabe})
+            }).then(
+                function(res){
+                return res.json();
+            }).then(
+                function(json) {
+                    var eingabe = prompt('Eine neue Liste: "'+ json.name + '" wurde erstellt:', json._id);
+                    console.log('Eine neue Liste: "'+ json.name + '" wurde erstellt: ' + json._id);
+                    if(eingabe != null){
+                        if(eingabe != ""){
+                            addListe(eingabe);
+                        } else{
+                            alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
+                        }
+                    }else{
+                        
+                    }
+                }
+            ) 
+            document.getElementById("eingabefeld").value = "";
+            
+            
+        } 
         
     }
-    
+      
 }
 
-function changeAPIKey(){
-    var eingabe = prompt('Bitte neuen API Key eingeben:', 'Key');
+//Wenn in input-field für neue Liste enter gedrückt wird, wird button daneben drückt
+var input = document.getElementById("eingabefeld");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    document.getElementById("submit").click();
+  }
+});
+
+
+function benutzerWechseln(){
+    var eingabe = prompt('Bitte API Key eingeben:', 'Key');
     if(eingabe != null){
         if(eingabe != ""){
-            var ram = apikey;
             apikey = eingabe;
-            alert("API Key erfolgreich geändert!\nAlt: " + ram + "\nNeu: " + apikey);
+            alert("Benutzer erfolgreich gewechselt!\nEingeloggt als: " + apikey);
+            document.getElementById("benutzer").value = "Benutzer wechseln..";
+
+            //Listen davor löschen
+            const e1 = document.getElementById("elemente");
+            while (e1.lastChild) {
+            e1.removeChild(e1.lastChild);
+            }
+            var newElement = document.createElement("button");
+            newElement.className = "liste active";
+            newElement.id = "starter";
+            document.getElementById("elemente").appendChild(newElement);
+            showAllLists();
+            
+            
         } else{
             alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
         }
-    }else{
-        
     }
+    
+
+}
+
+function showAllLists(){
+    //Request list an Backend
+    fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/",
+    {
+        headers: {
+        'Authorization': apikey,
+        },
+        method: "GET",
+    }).then(
+        function(res){
+        return res.json();
+    }).then(
+        function(json) {
+            for(var i=0; i< json.length; i++){
+                addListe(json[i]._id);
+                
+            }
+
+            
+           
+        }
+    )
+    home(); 
+    
+    
 }
 
 function checked(liste, element){

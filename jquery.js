@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     $(".liste").click(function(){
         $(".liste").css({"margin-left": "10px",
             "margin-right": "0",
@@ -7,7 +7,7 @@ $(document).ready(function(){
             "border-top-left-radius": "10px",
             "border-style": "none"});
     });
-});
+});*/
 
 $(function(){
     $(".liste").on( "click", "div", function( event ) {

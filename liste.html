@@ -12,7 +12,22 @@
 </head>
 <body>
     <header>
-     
+        <div id="heading" onclick="home()">
+            <div id="hleft">
+                <h2>Meine Listen</h2>
+            </div>
+            <div id="bhleft">
+                <h4>Mut zur Lücke</h4>
+            </div>
+            
+        </div>
+        <div id="erstellen">
+            
+            <input type="text" id="eingabefeld" name="firstname" placeholder="Liste erstellen..">
+            <input type="submit" value="Submit" onclick="listeErstellen()"><br>
+            <input type="submit" value="API Key wechseln.." onclick="changeAPIKey()">
+        </div>
+        
 
     </header>
     <menu>
@@ -25,14 +40,20 @@
                     </div>
                 </div>
         <div id="elemente">
-            <div class="liste">
+            <button class="liste active" id="starter"></button>
+            <button class="liste">
                 Liste
-            </div>
+            </button>
+            <button class="liste">
+                Liste
+            </button>
             
-            <div id="addlist">
-                <span id="addlisttext">Liste hinzufügen</span>
-                <img src="plus.png" class="plus" alt="" onclick="addlist()">
-            </div>
+            
+            
+        </div>
+        <div id="addlist">
+            <span id="addlisttext">Liste hinzufügen</span>
+            <img src="plus.png" class="plus" alt="" onclick="addlist()">
         </div>
         
     </menu>

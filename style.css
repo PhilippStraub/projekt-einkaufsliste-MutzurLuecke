@@ -148,9 +148,9 @@ main{
     border:none;
     
     padding: 10px; 
-    padding-right: 15vw;
-    display: block;
+    width:230px;
     white-space: nowrap;
+    text-align: left;
     
 }
 
@@ -313,7 +313,7 @@ input:checked + .slider:before {
     height: 25px;
     width: auto; 
     position: absolute;
-    left: 15vw;
+    left: 190px;
     margin-top: -5px;
     
 }

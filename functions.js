@@ -5,7 +5,7 @@ aktiveListen();
 document.getElementById("benutzer").value = "Einloggen..";
 
 setInterval(function (){
-    var btns = header.getElementsByClassName("liste");
+    btns = header.getElementsByClassName("liste");
     markieren();
 }, 1000);
 
@@ -28,6 +28,15 @@ function addlist(){
     if(eingabe != null){
         if(eingabe != ""){
             addListe(eingabe);
+            // nicwnieocnmeocmwe
+            while(document.getElementsById(eingabe) == undefined){
+
+            } 
+            var current = document.getElementsByClassName("liste");
+            for (var i = 1; i < current.length; i++) {
+                current[i].className = "liste";
+            }
+            current[current.length].className = "liste active";
         } else{
             alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
         }
@@ -172,6 +181,13 @@ function home(){
     console.log(c1);
     var e2 = c1[0];
     console.log(e2);
+
+
+    var current = document.getElementsByClassName("liste");
+    current[0].className = "liste active";
+    for (var i = 1; i < current.length; i++) {
+        current[i].className = "liste";
+    }
 }
 
 function list(){

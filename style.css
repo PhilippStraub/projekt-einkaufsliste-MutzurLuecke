@@ -128,8 +128,8 @@ main{
 
 
 #elemente{
-    margin-top: 55px;
-    margin-bottom: 40px;
+    margin-top: 50px;
+    margin-bottom: 40px;4
 }
 
 .liste{
@@ -315,14 +315,14 @@ input:checked + .slider:before {
     position: absolute;
     left: 190px;
     margin-top: -5px;
-    
+    visibility: hidden;
 }
 
 .liste .trash:hover{
     -webkit-transform: scale(1.25,1.25);
     -webkit-transition: all 0.3s ease-in-out;
 }
-#elemente .liste:target .trash{
+#elemente .liste.active .trash{
     visibility: visible;
 }
 

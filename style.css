@@ -325,6 +325,7 @@ input:checked + .slider:before {
 #elemente .liste.active .trash{
     visibility: visible;
 }
-
-
+#elemente .liste.active:hover{
+    background: #EBEBEB;
+}
   

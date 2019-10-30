@@ -4,10 +4,10 @@ var zähler = 0;
 aktiveListen();
 document.getElementById("benutzer").value = "Einloggen..";
 
-setInterval(function (){
-    btns = header.getElementsByClassName("liste");
-    markieren();
-}, 1000);
+// setInterval(function (){
+//     btns = header.getElementsByClassName("liste");
+//     markieren();
+// }, 1000);
 
 function aktiveListen(){
     
@@ -29,14 +29,17 @@ function addlist(){
         if(eingabe != ""){
             addListe(eingabe);
             // nicwnieocnmeocmwe
-            while(document.getElementsById(eingabe) == undefined){
-
-            } 
-            var current = document.getElementsByClassName("liste");
-            for (var i = 1; i < current.length; i++) {
-                current[i].className = "liste";
-            }
-            current[current.length].className = "liste active";
+            
+            new Promise(function(){
+                var current = document.getElementsByClassName("liste");
+                for (var i = 1; i < current.length; i++) {
+                    current[i].className = "liste";
+                }
+                current[current.length-1].className = "liste active";
+            })
+            
+            
+            
         } else{
             alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
         }

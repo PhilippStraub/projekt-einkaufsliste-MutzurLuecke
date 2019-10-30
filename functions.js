@@ -78,6 +78,8 @@ function addListe(eingabe){
 
 }
 
+
+
 function showlist(id){
     console.log(id);
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/"+id).then(
@@ -137,7 +139,7 @@ function showlist(id){
                     var newElement = document.createElement("div");
                     newElement.className = "item";
                     newElement.id = id;
-                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '<img src=trash.png id="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
+                    newElement.innerHTML = '<label class="switch"><input type="checkbox" name="gekauft"><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
                     console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
                 }
@@ -273,36 +275,38 @@ function changeAPIKey(){
 }
 
 function checked(liste, element){
-    console.log(document.getElementsByName("checkbox").checked)
-    if (document.getElementsByName("slider").input.checked == true){
-        console.log("HI")
-        status = false;
-    }
-    else {
-        console.log("yey")
-        status = true;
-    
-    }
-    var jsonObject = status
-   
-    //Put
-    console.log(liste, element);
-    console.log(jsonObject)
-    fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
-    {
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        },
-        method: "PUT",
-        body: JSON.stringify({"bought" : jsonObject})
-    }).then(
-        
-        function() {
-            showlist(liste);
-        }
-    )  
+    var checkboxes = document.getElementsByName('gekauft');
+    console.log(checkboxes);
+    checkboxes.values = true;
+    if (checkedValue == true){
+         console.log("HI")
+       }
+       else {
+           console.log("yey")
+       }
 }
+    
+//     }
+//     var jsonObject = status
+   
+//     //Put
+//     console.log(liste, element);
+//     console.log(jsonObject)
+//     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
+//     {
+//         headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//         },
+//         method: "PUT",
+//         body: JSON.stringify({"bought" : jsonObject})
+//     }).then(
+        
+//         function() {
+//             showlist(liste);
+//         }
+//     )  
+// }
 
 var header = document.getElementById("elemente");
 var btns = header.getElementsByClassName("liste");
@@ -350,5 +354,4 @@ req.send(data);
 //Wenn Antwort erhalten soll diese dem Nutzer mitgeteilt werden.
 req.onreadystatechange = function()
 {
-}
-*/
+}*/

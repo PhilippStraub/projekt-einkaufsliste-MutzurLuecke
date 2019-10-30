@@ -8,11 +8,11 @@ body{
     display: grid;
     height: 100%;
     width: 100%;
-    grid-template-columns: 230px auto;
+    grid-template-columns: 230px auto 300px;
     grid-template-rows: 13vh minmax(87vh, auto);
     grid-template-areas: 
-    'menu header'
-    'menu main';
+    'header header right'
+    'menu main main';
     font-family: 'Montserrat', sans-serif;
     overflow-y: scroll;
 }
@@ -39,23 +39,20 @@ main{
     margin-top: 10px;
     font-size: 110%;
     font-weight: bold;
-    width: 14%;
-
-}
+   }
 
 #bhleft{
     text-align: left;
     margin-left: 85px;
-    margin-top: 2px;
+    margin-top: 2px; 
     font-size: 80%;
     font-weight: lighter;
-    width: 8%;
-}
+    }
 
 #erstellen{
-    margin-top: -50px;
+    margin-top: 30px;
     float: right;
-    margin-right: 10px;
+    margin-right: 50px;
 }
 
 #erstellen input{
@@ -124,13 +121,6 @@ main{
     -webkit-transition: all 0.3s ease-in-out;
 }
 
-<<<<<<< HEAD
-
-
-#heading:hover{
-}
-=======
->>>>>>> da500204f06e3307684d1f05fbfce64997b02919
 
 #elemente{
     margin-top: 70px;

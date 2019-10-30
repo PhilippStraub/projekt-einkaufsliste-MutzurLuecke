@@ -1,0 +1,2 @@
+GET https://shopping-lists-api.herokuapp.com/api/v1/lists
+Authorization: 8f89439ed444bd0613763e7394e50bda

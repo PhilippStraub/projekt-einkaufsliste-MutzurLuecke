@@ -153,12 +153,21 @@ function showlist(id){
                     var items = json["items"][i]["name"];
                     var id = json["items"][i]["_id"];
                     var newElement = document.createElement("div");
+                    var kauf = json["items"][i]["bought"];
+                    console.log(kauf)
                     newElement.className = "item";
                     newElement.id = id;
-                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement('+ "'" + json._id + "','" + id + "'" + ')" alt="Entfernen">';
+                    newElement.value = false;
+                    if (kauf == false){
+                        newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')"><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
+                        document.getElementById("mainframe").appendChild(newElement);
+                    }
+                    else{
+                    newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')" checked><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
                     console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
                 }
+            }
             }
         )     
 }
@@ -350,36 +359,52 @@ function showAllLists(){
     
 }
 
-function checked(liste, element){
-    console.log(document.getElementsByName("checkbox").checked)
-    if (document.getElementsByName("slider").input.checked == true){
-        console.log("HI")
-        status = false;
-    }
-    else {
-        console.log("yey")
-        status = true;
-    
-    }
-    var jsonObject = status
-   
-    //Put
-    console.log(liste, element);
-    console.log(jsonObject)
-    fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
-    {
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        },
-        method: "PUT",
-        body: JSON.stringify({"bought" : jsonObject})
-    }).then(
+function check(element, liste, gekauftVal){
+    // console.log(element)
+    // var gekauft = document.getElementById('"'+element+'"')
+    // console.log(gekauft)
         
-        function() {
-            showlist(liste);
-        }
-    )  
+    //Falls noch nicht gekauft auf gekauft setzen
+    if (gekauftVal == false){
+        console.log("false")
+        gekauftVal = true;
+        fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
+        {
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            method: "PUT",
+            body: JSON.stringify({"bought" : gekauftVal})
+        }).then(
+            
+            function() {
+                showlist(liste);
+            }
+        )  
+    
+       }
+    //Falls schon gekauft auf nicht gekauft setzen
+    else if (gekauftVal == true) {
+        console.log("true")
+        gekauftVal = false
+        fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
+        {
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            method: "PUT",
+            body: JSON.stringify({"bought" : gekauftVal})
+        }).then(
+            
+            function() {
+                showlist(liste);
+            }
+        )  
+    
+       }
+       
 }
 
 

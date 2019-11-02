@@ -95,8 +95,9 @@ function addListe(eingabe){
 
 }
 
+
 function showlist(id){
-    console.log(id);
+    // console.log(id);
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/"+id).then(
         function(antwort){
             return antwort.json();
@@ -104,7 +105,7 @@ function showlist(id){
             function(json){
                 var c = document.getElementById("mainframe").childNodes;
                 var element = c[0];
-                console.log(element);
+                // console.log(element);
 
                 //Elemente davor entfernen
                 const e1 = document.getElementById("mainframe");
@@ -148,34 +149,60 @@ function showlist(id){
                     }                  
                 });
                 document.getElementById("mainframe").appendChild(newHinzufuegen);
-
+                var stringarraykauf = [];
                 for (i = 0; i < Object.keys(json.items).length; i++){
                     var items = json["items"][i]["name"];
                     var id = json["items"][i]["_id"];
                     var newElement = document.createElement("div");
                     var kauf = json["items"][i]["bought"];
-                    console.log(kauf)
+                    stringarraykauf.push(JSON.stringify(kauf));
+                    //console.log(kauf)
                     newElement.className = "item";
                     newElement.id = id;
                     newElement.value = false;
                     if (kauf == false){
-                        newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')"><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
+                        
+                        newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')"><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement('+ "'" + json._id + "'," + "'" + id + "'"+')" alt="Entfernen">';
                         document.getElementById("mainframe").appendChild(newElement);
                     }
                     else{
-                    newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')" checked><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
-                    console.log(items);
+                    newElement.style="text-decoration:line-through; color:lightgray"
+                    newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')" checked><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement('+ "'" + json._id + "'," + "'" + id + "'"+')" alt="Entfernen">';
+                    //console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
                 }
+                
+                // console.log(stringarraykauf);
+                // console.log(allEqual(stringarraykauf))
+                // if (Array.json["items"][i]["bought"] === true){
+                    // console.log("alle gekauft")
+                // }
+                // else {
+                    // console.log("Was geht ab Berlin")
+                    // console.log(json["items"][i]["bought"])
+                // }
+            } 
+            if (allEqual(stringarraykauf) == true) {
+                console.log("funkt");
+                document.getElementById(json._id).style="text-decoration:line-through; color:grey"
+            }  
+            else{
+                document.getElementById(json._id).style="text-decoration:none; color:black"
+            }   
             }
-            }
-        )     
-}
+        )
+}       
+function allEqual(arr) {
+    return new Set(arr).size == 1;
+  }
+            
+            
+    
 
 function home(){
     var c = document.getElementById("main").childNodes;
     var element = c[0];
-    console.log(element);
+    //console.log(element);
 
     //Elemente davor entfernen
     const e1 = document.getElementById("main");
@@ -190,9 +217,9 @@ function home(){
     document.getElementById("main").appendChild(newElement);
 
     var c1 = document.getElementById("main").childNodes;
-    console.log(c1);
+    //console.log(c1);
     var e2 = c1[0];
-    console.log(e2);
+    //console.log(e2);
 
 
     var current = document.getElementsByClassName("liste");
@@ -218,9 +245,9 @@ function list(){
 }
 
 function deleteElement(liste, element){
-    console.log(liste);
-    console.log(element);
-    console.log("Ich werde entfernt..");
+    // console.log(liste);
+    // console.log(element);
+    // console.log("Ich werde entfernt..");
     //DELETE fetch
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/"+ liste +"/items/"+ element,
     {
@@ -232,7 +259,7 @@ function deleteElement(liste, element){
 }
 
 function deleteListe(liste){
-    console.log("Ich werde entfernt..");
+    // console.log("Ich werde entfernt..");
     //DELETE fetch
     
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste,
@@ -243,7 +270,7 @@ function deleteListe(liste){
         method: "DELETE",
     }).then(
         function() {
-            console.log("Nach Hause telefonieren");
+            // console.log("Nach Hause telefonieren");
             home();
             //Liste an der Seite löschen
             var element = document.getElementById(liste);
@@ -274,7 +301,7 @@ function listeErstellen(){
             }).then(
                 function(json) {
                     var eingabe = prompt('Eine neue Liste: "'+ json.name + '" wurde erstellt:', json._id);
-                    console.log('Eine neue Liste: "'+ json.name + '" wurde erstellt: ' + json._id);
+                    // console.log('Eine neue Liste: "'+ json.name + '" wurde erstellt: ' + json._id);
                     if(eingabe != null){
                         if(eingabe != ""){
                             addListe(eingabe);
@@ -360,13 +387,11 @@ function showAllLists(){
 }
 
 function check(element, liste, gekauftVal){
-    // console.log(element)
-    // var gekauft = document.getElementById('"'+element+'"')
-    // console.log(gekauft)
+  
         
     //Falls noch nicht gekauft auf gekauft setzen
     if (gekauftVal == false){
-        console.log("false")
+        // console.log("false")
         gekauftVal = true;
         fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
         {
@@ -386,7 +411,7 @@ function check(element, liste, gekauftVal){
        }
     //Falls schon gekauft auf nicht gekauft setzen
     else if (gekauftVal == true) {
-        console.log("true")
+        // console.log("true")
         gekauftVal = false
         fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
         {
@@ -407,6 +432,27 @@ function check(element, liste, gekauftVal){
        
 }
 
+// function allItemsBought(element, liste){
+    // fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element).then(
+        // function(antwort){
+            // return antwort.json();
+        // }).then(
+            // function(json){
+                // for (i = 0; i < Object.keys(json.items).length; i++){
+                // var allegekauft = [json["items"][i]["bought"]];
+                // 
+                // if (allegekauft[i] == true){
+                    // console.log("Alle gekauft")
+                // }
+                // else {
+                    // console.log("Nicht alle gekauft")
+                // }
+            // }
+        // 
+        // }
+        // )
+    // }    
+// 
 
 function removeListe(id){
     
@@ -426,7 +472,7 @@ var header = document.getElementById("elemente");
 var btns = header.getElementsByClassName("liste");
 function markieren(){
     for (var i = 0; i < btns.length; i++) {
-        console.log("ja");
+        // console.log("ja");
       btns[i].addEventListener("click", function() {
       var current = document.getElementsByClassName("active");
       current[0].className = current[0].className.replace(" active", "");

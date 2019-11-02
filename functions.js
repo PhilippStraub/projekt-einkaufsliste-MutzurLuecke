@@ -2,7 +2,7 @@ var apikey = null; //Dev API Key: a3f48db84af0037bac2c9ad2fd5fbf88
 var listen = [null];
 var zähler = 0;
 aktiveListen();
-//document.getElementById("benutzer").value = ("Einloggen..");
+document.getElementById("benutzer").value = "Einloggen..";
 
 // setInterval(function (){
 //     btns = header.getElementsByClassName("liste");
@@ -95,8 +95,6 @@ function addListe(eingabe){
 
 }
 
-
-
 function showlist(id){
     console.log(id);
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/"+id).then(
@@ -155,21 +153,12 @@ function showlist(id){
                     var items = json["items"][i]["name"];
                     var id = json["items"][i]["_id"];
                     var newElement = document.createElement("div");
-                    var kauf = json["items"][i]["bought"];
-                    console.log(kauf)
                     newElement.className = "item";
                     newElement.id = id;
-                    newElement.value = false;
-                    if (kauf == false){
-                        newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')"><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
-                        document.getElementById("mainframe").appendChild(newElement);
-                    }
-                    else{
-                    newElement.innerHTML = '<label class="switch"><input type="checkbox" id="'+id+'" onclick="check('+ "'" + id + "'," + "'" + json._id + "',"+kauf+')" checked><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement(' + json._id + ', ' + id + ')" alt="Entfernen">';
+                    newElement.innerHTML = '<label class="switch"><input type="checkbox"><span class="slider round"></span></label>' + items + '<img src=trash.png class="trash" onclick="deleteElement('+ "'" + json._id + "','" + id + "'" + ')" alt="Entfernen">';
                     console.log(items);
                     document.getElementById("mainframe").appendChild(newElement);
                 }
-            }
             }
         )     
 }
@@ -361,62 +350,38 @@ function showAllLists(){
     
 }
 
-function check(element, liste, gekauftVal){
-    // console.log(element)
-    // var gekauft = document.getElementById('"'+element+'"')
-    // console.log(gekauft)
+function checked(liste, element){
+    console.log(document.getElementsByName("checkbox").checked)
+    if (document.getElementsByName("slider").input.checked == true){
+        console.log("HI")
+        status = false;
+    }
+    else {
+        console.log("yey")
+        status = true;
+    
+    }
+    var jsonObject = status
+   
+    //Put
+    console.log(liste, element);
+    console.log(jsonObject)
+    fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
+    {
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+        },
+        method: "PUT",
+        body: JSON.stringify({"bought" : jsonObject})
+    }).then(
         
-    //Falls noch nicht gekauft auf gekauft setzen
-    if (gekauftVal == false){
-        console.log("false")
-        gekauftVal = true;
-        fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
-        {
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            },
-            method: "PUT",
-            body: JSON.stringify({"bought" : gekauftVal})
-        }).then(
-            
-            function() {
-                showlist(liste);
-            }
-        )  
-    
-       }
-    //Falls schon gekauft auf nicht gekauft setzen
-    else if (gekauftVal == true) {
-        console.log("true")
-        gekauftVal = false
-        fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
-        {
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            },
-            method: "PUT",
-            body: JSON.stringify({"bought" : gekauftVal})
-        }).then(
-            
-            function() {
-                showlist(liste);
-            }
-        )  
-    
-       }
-       
+        function() {
+            showlist(liste);
+        }
+    )  
 }
 
-    
-//     }
-//     var jsonObject = status
-   
-//     //Put
-//     console.log(liste, element);
-//     console.log(jsonObject)
-   
 
 function removeListe(id){
     
@@ -478,4 +443,5 @@ req.send(data);
 //Wenn Antwort erhalten soll diese dem Nutzer mitgeteilt werden.
 req.onreadystatechange = function()
 {
-}*/
+}
+*/

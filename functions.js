@@ -1,4 +1,4 @@
-var apikey = null;
+var apikey = null; //Dev API Key: a3f48db84af0037bac2c9ad2fd5fbf88
 var listen = [null];
 var zähler = 0;
 aktiveListen();
@@ -62,7 +62,7 @@ function addListe(eingabe){
         function (json) {
         var nameListe = json["name"];
         var newElement = document.createElement("button");
-        newElement.innerHTML = nameListe + '<img src=trash.png class="trash" onclick="deleteListe('+ "'" + json._id + "'" + ')" alt="Entfernen">';
+        newElement.innerHTML = nameListe + '<a title="Liste ausblenden"><img src=minus.png class="trash" id="rempic" onclick="removeListe('+ "'" + json._id + "'" + ')" alt="Ausblenden"></a><a title="Liste löschen"><img src=trash.png class="trash" onclick="deleteListe('+ "'" + json._id + "'" + ')" alt="Entfernen"></a>';
         newElement.className = 'liste';
         newElement.id = json._id;
         newElement.addEventListener('click',
@@ -187,7 +187,7 @@ function home(){
 
     //Neue Elemente anzeigen
     var newElement = document.createElement("div");
-	newElement.innerHTML = '<div class="start" id="begrüßung"><h1>Herzliche willkommen zu deiner Lieblings ToDo-App</h1><h3>Mit diesem lblblblblblblblbllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll</h3></div><div class="start" id="tutorial"><h1 id="tut">Wie funktionert das Ganze?</h1><h3 id="tutu">Nachdem du deine API erhalten hast kannst du auf dem kleinen  Feld links unten eine neue Liste erstellen. Du musst nur den Key in das Textfeld kopieren und schon kannst du in deiner neuen Liste ToDos hinzufügen, als fertig gestellt markieren oder löschen.</h3></div>';
+	newElement.innerHTML = '<div class="start" id="begrüßung"><h1>Herzliche willkommen zu deiner Lieblings ToDo-App</h1><h3>Mit diesem</h3></div><div class="start" id="tutorial"><h1 id="tut">Wie funktionert das Ganze?</h1><h3 id="tutu">Nachdem du deine API erhalten hast kannst du auf dem kleinen  Feld links unten eine neue Liste erstellen. Du musst nur den Key in das Textfeld kopieren und schon kannst du in deiner neuen Liste ToDos hinzufügen, als fertig gestellt markieren oder löschen.</h3></div>';
     newElement.id = "mainframe";
     document.getElementById("main").appendChild(newElement);
 
@@ -417,6 +417,20 @@ function check(element, liste, gekauftVal){
 //     console.log(liste, element);
 //     console.log(jsonObject)
    
+
+function removeListe(id){
+    
+    //Liste an der Seite löschen
+    var liste = document.getElementById(id);
+    liste.parentNode.removeChild(liste); 
+    setTimeout(function (){
+        home();
+    }, 500);
+    
+
+}
+
+
 
 var header = document.getElementById("elemente");
 var btns = header.getElementsByClassName("liste");

@@ -2,6 +2,7 @@ var apikey = null; //Dev API Key: a3f48db84af0037bac2c9ad2fd5fbf88
 var listen = [null];
 var zähler = 0;
 aktiveListen();
+home();
 document.getElementById("benutzer").value = "Einloggen..";
 
 // setInterval(function (){

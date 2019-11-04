@@ -26,7 +26,7 @@ function aktiveListen() {
 function addlist() {
     var eingabe = prompt("Bitte die ID der Liste eingeben:", "ID");
     if (eingabe != null) {
-        if (eingabe != "") {
+        if (eingabe != "" && checkSyntax(eingabe) == true) {
             addListe(eingabe);
             // nicwnieocnmeocmwe
 
@@ -122,7 +122,7 @@ function showlist(id) {
 
                         var eingabe = prompt("Bitte Namen des neuen Elements eingeben", "Name");
                         if (eingabe != null) {
-                            if (eingabe != "" && eingabe != "Name") {
+                            if (eingabe != "" && eingabe != "Name" && checkSyntax(eingabe) == true) {
                                 fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + json._id + "/items",
                                     {
                                         headers: {
@@ -201,6 +201,16 @@ function allEqual(arr) {
         return true;
     }
     else { console.log("Da funkt was nicht") }
+}
+function checkSyntax(text){
+    arr = new Set(text);
+    if (arr.has("<")){
+        return false;
+    }
+    if (arr.has(">")){
+       return false; 
+    }
+    else {return true;}
 }
 
 function home() {
@@ -289,7 +299,7 @@ function listeErstellen() {
         document.getElementById("eingabefeld").value = "";
     } else {
         var eingabe = document.getElementById("eingabefeld").value;
-        if (eingabe != "") {
+        if (eingabe != "" && checkSyntax(eingabe) == true) {
             fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists",
                 {
                     headers: {
@@ -307,7 +317,7 @@ function listeErstellen() {
                             var eingabe = prompt('Eine neue Liste: "' + json.name + '" wurde erstellt:', json._id);
                             // console.log('Eine neue Liste: "'+ json.name + '" wurde erstellt: ' + json._id);
                             if (eingabe != null) {
-                                if (eingabe != "") {
+                                if (eingabe != "" && checkSyntax(eingabe) == true) {
                                     addListe(eingabe);
                                 } else {
                                     alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
@@ -338,7 +348,7 @@ input.addEventListener("keyup", function (event) {
 function benutzerWechseln() {
     var eingabe = prompt('Bitte API Key eingeben:', 'Key');
     if (eingabe != null) {
-        if (eingabe != "") {
+        if (eingabe != "" && checkSyntax(eingabe) == true) {
             apikey = eingabe;
             alert("Benutzer erfolgreich gewechselt!\nEingeloggt als: " + apikey);
             document.getElementById("benutzer").value = "Benutzer wechseln..";

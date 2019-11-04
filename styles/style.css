@@ -1,7 +1,5 @@
-* {
-    padding: 0;
-    margin: 0;
-}
+* {padding: 0;    margin: 0;}
+
 body{
     background:url("background.png");
     background-size: cover;
@@ -19,8 +17,7 @@ body{
 
 menu{
     grid-area: menu;
-    background: none;
-    
+    background: none;  
 }
 
 header{
@@ -34,7 +31,6 @@ main{
     background-color: #EBEBEB;
 }
 
-
 #hleft{
     text-align: left;
     margin-left: 10px;
@@ -42,7 +38,6 @@ main{
     font-size: 110%;
     font-weight: bold;
     width: 50%;
-
 }
 
 #bhleft{
@@ -126,32 +121,18 @@ main{
     -webkit-transition: all 0.3s ease-in-out;
 }
 
-
 #elemente{
     margin-top: 50px;
     margin-bottom: 40px;
 }
 
 .liste{
-    /*
-    background:#EBEBEB;
-    border-radius: 15px;
-    margin-top: 5px;
-    margin-left: 10px;
-    padding: 10px;
-    border-style: solid;
-    border-color: #6B6B6B;
-    border-width: 1.5px;
-    padding-right: 13vw;*/
-    
     outline: none;
     border:none;
-    
     padding: 10px; 
     width:230px;
     white-space: nowrap;
     text-align: left;
-    
 }
 
 .liste:hover{
@@ -160,22 +141,13 @@ main{
 .active  {
     padding-right: 16vw;
     background: #EBEBEB;
-    border-top-color: white;
-    
+    border-top-color: white;  
 }
 
 #starter{
     visibility: hidden;
 }
-/*
-.active{
-    margin-left: 10px;
-    margin-right: 0;
-    background: #EBEBEB;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    border-style: none;
-}*/
+
 .start{
     border-style: solid;
     border-width: 1px;
@@ -184,26 +156,25 @@ main{
     border-bottom-left-radius: 10px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-
 }
 
 #begrüßung {
-
     margin: 30px;
     padding: 50px;
     margin-right: 200px;
     
 }
 #tutorial {
-
     margin: 30px;
     padding: 50px;
     margin-right: 200px;
    
 }
+
 #tut {
     font-size: 30px;
 }
+
 #tutu {
     font-size: 20px;
 }
@@ -322,9 +293,11 @@ input:checked + .slider:before {
     -webkit-transform: scale(1.25,1.25);
     -webkit-transition: all 0.3s ease-in-out;
 }
+
 #elemente .liste.active .trash{
     visibility: visible;
 }
+
 #elemente .liste.active:hover{
     background: #EBEBEB;
 }
@@ -341,24 +314,6 @@ input:checked + .slider:before {
     left: 160px;
     margin-top: -3px;
 }
-/*
-#menupic{
-    height: 25px;
-    width: auto; 
-    float: right;
-    margin-right: 5px;
-    margin-top: 10px;
-}
-
-#menupic:hover{
-    -webkit-transform: scale(1.15,1.15);
-    -webkit-transition: all 0.3s ease-in-out;
-}
-
-#menupic:active{
-    transform: scale(0.5);
-}*/
-
 
 @media (max-width: 600px) {
     body {
@@ -373,7 +328,6 @@ input:checked + .slider:before {
         'menu main';
         font-family: 'Montserrat', sans-serif;
         overflow-y: scroll;
-
     }
 
     header{
@@ -384,29 +338,21 @@ input:checked + .slider:before {
         margin-right: -75px;
     }
 
-    menu{
-        
-    }
-
     main{
         width: 100vw;
         height: 100vh;
-
     }
 
     main #begrüßung {
         margin: 20px;
         padding: 30px;
-
     }
 
     main #tutorial {
         margin: 20px;
         padding: 30px;
-
     }
     
-
     main h3{
         font-size: 0.8;
     }
@@ -414,5 +360,4 @@ input:checked + .slider:before {
     h1{
         font-size: 95%;
     }
-
 }

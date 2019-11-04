@@ -10,7 +10,6 @@ document.getElementById("benutzer").value = "Einloggen..";
 // }, 1000);
 
 function aktiveListen() {
-
     if (listen[0] != null) {
         for (var i = 0; i < listen.length; i++) {
             /*
@@ -18,9 +17,7 @@ function aktiveListen() {
             console.log(listen[i]);
             addListe(window.localStorage.getItem(i));*/
         }
-    } else {
-
-    }
+    } else {}
 }
 
 function addlist() {
@@ -28,8 +25,6 @@ function addlist() {
     if (eingabe != null) {
         if (eingabe != "" && checkSyntax(eingabe) == true) {
             addListe(eingabe);
-            // nicwnieocnmeocmwe
-
             new Promise(function () {
                 var current = document.getElementsByClassName("liste");
                 for (var i = 1; i < current.length; i++) {
@@ -37,19 +32,13 @@ function addlist() {
                 }
                 current[current.length - 1].className = "liste active";
             })
-
-
-
         } else {
             alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
         }
-    } else {
-
-    }
+    } else {}
 }
 
 function addListe(eingabe) {
-
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + eingabe).then(
         function (antwort) {
             if (antwort.status == 200) {
@@ -77,22 +66,9 @@ function addListe(eingabe) {
                 zähler++;*//*
                 window.localStorage.setItem(zähler,String(eingabe));
                 zähler++;*/
-
-
-
-
-
                 document.getElementById("elemente").appendChild(newElement);
-
                 showlist(eingabe);
-
-
-
-
-
             });
-
-
 }
 
 function showlist(id) {
@@ -103,9 +79,7 @@ function showlist(id) {
         }).then(
             function (json) {
                 var c = document.getElementById("mainframe").childNodes;
-                var element = c[0];
-                // console.log(element);
-
+                var element = c[0];  
                 //Elemente davor entfernen
                 const e1 = document.getElementById("mainframe");
                 while (e1.firstChild) {
@@ -116,10 +90,8 @@ function showlist(id) {
                 newHinzufuegen.id = "additem";
                 newHinzufuegen.innerHTML = 'Item hinzufügen';
                 newHinzufuegen.liste = json._id;
-                //Request
                 newHinzufuegen.addEventListener('click',
                     function adding(event) {
-
                         var eingabe = prompt("Bitte Namen des neuen Elements eingeben", "Name");
                         if (eingabe != null) {
                             if (eingabe != "" && eingabe != "Name" && checkSyntax(eingabe) == true) {
@@ -139,12 +111,10 @@ function showlist(id) {
                                                 showlist(json._id);
                                             }
                                         )
-
                             } else {
                                 alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
                             }
                         } else {
-
                         }
                     });
                 document.getElementById("mainframe").appendChild(newHinzufuegen);
@@ -160,7 +130,6 @@ function showlist(id) {
                     newElement.id = id;
                     newElement.value = false;
                     if (kauf == false) {
-
                         newElement.innerHTML = '<label class="switch"><input type="checkbox" id="' + id + '" onclick="check(' + "'" + id + "'," + "'" + json._id + "'," + kauf + ')"><span class="slider round"></span></label>' + items + '<img src=pictures/trash.png class="trash" onclick="deleteElement(' + "'" + json._id + "'," + "'" + id + "'" + ')" alt="Entfernen">';
                         document.getElementById("mainframe").appendChild(newElement);
                     }
@@ -170,16 +139,6 @@ function showlist(id) {
                         //console.log(items);
                         document.getElementById("mainframe").appendChild(newElement);
                     }
-
-                    // console.log(stringarraykauf);
-                    // console.log(allEqual(stringarraykauf))
-                    // if (Array.json["items"][i]["bought"] === true){
-                    // console.log("alle gekauft")
-                    // }
-                    // else {
-                    // console.log("Was geht ab Berlin")
-                    // console.log(json["items"][i]["bought"])
-                    // }
                 }
                 if (allEqual(stringarraykauf) == true) {
                     document.getElementById(json._id).style = "text-decoration:line-through; color:grey"
@@ -202,6 +161,7 @@ function allEqual(arr) {
     }
     else { console.log("Da funkt was nicht") }
 }
+
 function checkSyntax(text){
     arr = new Set(text);
     if (arr.has("<")){
@@ -216,26 +176,18 @@ function checkSyntax(text){
 function home() {
     var c = document.getElementById("main").childNodes;
     var element = c[0];
-    //console.log(element);
-
     //Elemente davor entfernen
     const e1 = document.getElementById("main");
     while (e1.firstChild) {
         e1.removeChild(e1.firstChild);
     }
-
     //Neue Elemente anzeigen
     var newElement = document.createElement("div");
     newElement.innerHTML = '<div class="start" id="begrüßung"><h1>Herzliche willkommen zu deiner Lieblings ToDo-App</h1><h3>Mit diesem</h3></div><div class="start" id="tutorial"><h1 id="tut">Wie funktionert das Ganze?</h1><h3 id="tutu">Nachdem du deine API erhalten hast kannst du auf dem kleinen  Feld links unten eine neue Liste erstellen. Du musst nur den Key in das Textfeld kopieren und schon kannst du in deiner neuen Liste ToDos hinzufügen, als fertig gestellt markieren oder löschen.</h3></div>';
     newElement.id = "mainframe";
     document.getElementById("main").appendChild(newElement);
-
     var c1 = document.getElementById("main").childNodes;
-    //console.log(c1);
     var e2 = c1[0];
-    //console.log(e2);
-
-
     var current = document.getElementsByClassName("liste");
     current[0].className = "liste active";
     for (var i = 1; i < current.length; i++) {
@@ -249,13 +201,11 @@ function list() {
     while (e1.firstChild) {
         e1.removeChild(e1.firstChild);
     }
-
     //Neue Elemente anzeigen
     var newElement = document.createElement("div");
     newElement.innerHTML = '<div class="item">Element1</div><div class="item">Element2</div>';
     newElement.id = "mainframe";
     document.getElementById("main").appendChild(newElement);
-
 }
 
 function deleteElement(liste, element) {
@@ -273,9 +223,7 @@ function deleteElement(liste, element) {
 }
 
 function deleteListe(liste) {
-    // console.log("Ich werde entfernt..");
     //DELETE fetch
-
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste,
         {
             headers: {
@@ -323,17 +271,12 @@ function listeErstellen() {
                                     alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
                                 }
                             } else {
-
                             }
                         }
                     )
             document.getElementById("eingabefeld").value = "";
-
-
         }
-
     }
-
 }
 
 //Wenn in input-field für neue Liste enter gedrückt wird, wird button daneben drückt
@@ -352,7 +295,6 @@ function benutzerWechseln() {
             apikey = eingabe;
             alert("Benutzer erfolgreich gewechselt!\nEingeloggt als: " + apikey);
             document.getElementById("benutzer").value = "Benutzer wechseln..";
-
             //Listen davor löschen
             const e1 = document.getElementById("elemente");
             while (e1.lastChild) {
@@ -363,14 +305,10 @@ function benutzerWechseln() {
             newElement.id = "starter";
             document.getElementById("elemente").appendChild(newElement);
             showAllLists();
-
-
         } else {
             alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
         }
     }
-
-
 }
 
 function showAllLists() {
@@ -388,16 +326,10 @@ function showAllLists() {
                 function (json) {
                     for (var i = 0; i < json.length; i++) {
                         addListe(json[i]._id);
-
                     }
-
-
-
                 }
             )
     home();
-
-
 }
 
 function check(element, liste, gekauftVal) {
@@ -416,12 +348,10 @@ function check(element, liste, gekauftVal) {
                 method: "PUT",
                 body: JSON.stringify({ "bought": gekauftVal })
             }).then(
-
                 function () {
                     showlist(liste);
                 }
             )
-
     }
     //Falls schon gekauft auf nicht gekauft setzen
     else if (gekauftVal == true) {
@@ -436,12 +366,10 @@ function check(element, liste, gekauftVal) {
                 method: "PUT",
                 body: JSON.stringify({ "bought": gekauftVal })
             }).then(
-
                 function () {
                     showlist(liste);
                 }
             )
-
     }
 
 }
@@ -467,7 +395,6 @@ function check(element, liste, gekauftVal) {
 // )
 // }    
 // 
-
 function removeListe(id) {
 
     //Liste an der Seite löschen
@@ -476,11 +403,7 @@ function removeListe(id) {
     setTimeout(function () {
         home();
     }, 500);
-
-
 }
-
-
 
 var header = document.getElementById("elemente");
 var btns = header.getElementsByClassName("liste");
@@ -495,7 +418,6 @@ function markieren() {
     }
 }
 markieren();
-
 /*
 function add(){
     var newElement = document.createElement("div");

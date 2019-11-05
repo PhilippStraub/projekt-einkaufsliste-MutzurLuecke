@@ -1,16 +1,6 @@
 var apikey = null; //Dev API Key: a3f48db84af0037bac2c9ad2fd5fbf88
-var listen = [null];
-var zähler = 0;
-aktiveListen();
 document.getElementById("benutzer").value = "Einloggen..";
 home();
-
-function aktiveListen() {
-    if (listen[0] != null) {
-        for (var i = 0; i < listen.length; i++) {
-        }
-    } else {}
-}
 
 function addlist() {
     var eingabe = prompt("Bitte die ID der Liste eingeben:", "ID");

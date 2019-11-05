@@ -172,13 +172,10 @@ main{
     padding: 50px;
 }
 
-#tut {
-    font-size: 30px;
+#tut{
+    font-size: 25px;
 }
 
-#tutu {
-    font-size: 20px;
-}
 
 #mainframe{
     padding:10px;
@@ -314,6 +311,8 @@ input:checked + .slider:before {
 }
 
 @media (min-width: 600px) and (max-width: 876px) {
+
+
     #addlist{
         width:100%;
         text-align: center;
@@ -327,8 +326,13 @@ input:checked + .slider:before {
 
     main{
         height: 100%;
-
+        font-size: 89%;
     }
+    
+    main h1{
+        font-size: 25px;
+    }
+
     header #erstellen{
         margin-top: -20px;
         margin-right: 25px;
@@ -354,7 +358,7 @@ input:checked + .slider:before {
         font-family: 'Montserrat', sans-serif;
         overflow-y: scroll;
     }
-
+    
     header{
         width: 100vw;
     }
@@ -371,6 +375,15 @@ input:checked + .slider:before {
     main{
         width: 100vw;
         height: 100%;
+        font-size: 85%;
+    }
+
+    main h1{
+        font-size: 18px;
+    }
+
+    #tut{
+        font-size: 18px;
     }
 
     main #begrüßung {
@@ -383,13 +396,6 @@ input:checked + .slider:before {
         padding: 30px;
     }
     
-    main h3{
-        font-size: 0.8;
-    }
-
-    h1{
-        font-size: 95%;
-    }
 
     #addlist{
         width:100%;

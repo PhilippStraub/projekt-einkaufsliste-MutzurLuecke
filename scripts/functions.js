@@ -2,21 +2,12 @@ var apikey = null; //Dev API Key: a3f48db84af0037bac2c9ad2fd5fbf88
 var listen = [null];
 var zähler = 0;
 aktiveListen();
-
 document.getElementById("benutzer").value = "Einloggen..";
 home();
-// setInterval(function (){
-//     btns = header.getElementsByClassName("liste");
-//     markieren();
-// }, 1000);
 
 function aktiveListen() {
     if (listen[0] != null) {
         for (var i = 0; i < listen.length; i++) {
-            /*
-            addListe(listen[i]);
-            console.log(listen[i]);
-            addListe(window.localStorage.getItem(i));*/
         }
     } else {}
 }
@@ -31,7 +22,6 @@ function addlist() {
                 for (var i = 1; i < current.length; i++) {
                     current[i].className = "liste";
                 }
-                current[current.length - 1].className = "liste active";
             })
         } else {
             alert("Keine Eingabe erhalten!\nBitte erneut versuchen.");
@@ -61,19 +51,13 @@ function addListe(eingabe) {
                         markieren();
                         showlist(event.target.id);
                     });
-                /*
-                listen[zähler] = String(eingabe);
-                console.log(listen[zähler]);
-                zähler++;*//*
-                window.localStorage.setItem(zähler,String(eingabe));
-                zähler++;*/
+                
                 document.getElementById("elemente").appendChild(newElement);
                 showlist(eingabe);
             });
 }
 
 function showlist(id) {
-    // console.log(id);
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + id).then(
         function (antwort) {
             return antwort.json();
@@ -126,7 +110,6 @@ function showlist(id) {
                     var newElement = document.createElement("div");
                     var kauf = json["items"][i]["bought"];
                     stringarraykauf.push(JSON.stringify(kauf));
-                    //console.log(kauf)
                     newElement.className = "item";
                     newElement.id = id;
                     newElement.value = false;
@@ -137,7 +120,6 @@ function showlist(id) {
                     else {
                         newElement.style = "text-decoration:line-through; color:lightgray"
                         newElement.innerHTML = '<label class="switch"><input type="checkbox" id="' + id + '" onclick="check(' + "'" + id + "'," + "'" + json._id + "'," + kauf + ')" checked><span class="slider round"></span></label>' + items + '<img src=pictures/trash.png class="trash" onclick="deleteElement(' + "'" + json._id + "'," + "'" + id + "'" + ')" alt="Entfernen">';
-                        //console.log(items);
                         document.getElementById("mainframe").appendChild(newElement);
                     }
                 }
@@ -153,14 +135,13 @@ function showlist(id) {
 
 function allEqual(arr) {
     x = new Set(arr)
-    console.log(x)
     if (x.has("false")) {
         return false;
     }
     else if (x.size == 1 && x.has("true")) {
         return true;
     }
-    else { console.log("Da funkt was nicht") }
+    else {}
 }
 
 function checkSyntax(text){
@@ -184,7 +165,7 @@ function home() {
     }
     //Neue Elemente anzeigen
     var newElement = document.createElement("div");
-    newElement.innerHTML = '<div class="start" id="begrüßung"><h1>Herzliche willkommen zu deiner Lieblings ToDo-App</h1><h3>Mit diesem</h3></div><div class="start" id="tutorial"><h1 id="tut">Wie funktionert das Ganze?</h1><h3 id="tutu">Nachdem du deine API erhalten hast kannst du auf dem kleinen  Feld links unten eine neue Liste erstellen. Du musst nur den Key in das Textfeld kopieren und schon kannst du in deiner neuen Liste ToDos hinzufügen, als fertig gestellt markieren oder löschen.</h3></div>';
+    newElement.innerHTML = '<div class="start" id="begrüßung"><h1>Herzlich Willkommen zu deiner Lieblings ToDo-App!</h1></div><div class="start" id="tutorial"><h1 id="tut">Wie funktionert das Ganze?</h1><br><h3 id="tutu">Nachdem du dir ein <a href="https://shopping-lists-api.herokuapp.com/">Konto erstellt<a> und deine API erhalten hast, kannst du dich im Feld rechts oben einloggen. Sobald das geschehen ist, werden alle Listen die du bereits erstellt hast, angezeigt. Des weiteren lassen sich von dir dort weitere Listen erstellen. <br><br>Auf "Liste hinzufügen" kannst du auch Listen auf Listen deiner Freunde zugreifen, solange du die genaue ID besitzt.<br><br>Der Rest erklärt sich von selbst, VIEL SPAß!</h3></div>';
     newElement.id = "mainframe";
     document.getElementById("main").appendChild(newElement);
     var c1 = document.getElementById("main").childNodes;
@@ -210,9 +191,6 @@ function list() {
 }
 
 function deleteElement(liste, element) {
-    // console.log(liste);
-    // console.log(element);
-    // console.log("Ich werde entfernt..");
     //DELETE fetch
     fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
         {
@@ -233,7 +211,6 @@ function deleteListe(liste) {
             method: "DELETE",
         }).then(
             function () {
-                // console.log("Nach Hause telefonieren");
                 home();
                 //Liste an der Seite löschen
                 var element = document.getElementById(liste);
@@ -264,7 +241,7 @@ function listeErstellen() {
                     }).then(
                         function (json) {
                             var eingabe = prompt('Eine neue Liste: "' + json.name + '" wurde erstellt:', json._id);
-                            // console.log('Eine neue Liste: "'+ json.name + '" wurde erstellt: ' + json._id);
+                            console.log('Eine neue Liste: "'+ json.name + '" wurde erstellt: ' + json._id);
                             if (eingabe != null) {
                                 if (eingabe != "" && checkSyntax(eingabe) == true) {
                                     addListe(eingabe);
@@ -275,6 +252,11 @@ function listeErstellen() {
                             }
                         }
                     )
+            var current = document.getElementsByClassName("liste");
+            current[0].className = "liste active";
+            for (var i = 1; i < current.length; i++) {
+                current[i].className = "liste";
+            }
             document.getElementById("eingabefeld").value = "";
         }
     }
@@ -338,7 +320,6 @@ function check(element, liste, gekauftVal) {
 
     //Falls noch nicht gekauft auf gekauft setzen
     if (gekauftVal == false) {
-        // console.log("false")
         gekauftVal = true;
         fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
             {
@@ -356,7 +337,6 @@ function check(element, liste, gekauftVal) {
     }
     //Falls schon gekauft auf nicht gekauft setzen
     else if (gekauftVal == true) {
-        // console.log("true")
         gekauftVal = false
         fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element,
             {
@@ -374,28 +354,7 @@ function check(element, liste, gekauftVal) {
     }
 
 }
-// localStorage.reload(true);
-// function allItemsBought(element, liste){
-// fetch("https://shopping-lists-api.herokuapp.com/api/v1/lists/" + liste + "/items/" + element).then(
-// function(antwort){
-// return antwort.json();
-// }).then(
-// function(json){
-// for (i = 0; i < Object.keys(json.items).length; i++){
-// var allegekauft = [json["items"][i]["bought"]];
-// 
-// if (allegekauft[i] == true){
-// console.log("Alle gekauft")
-// }
-// else {
-// console.log("Nicht alle gekauft")
-// }
-// }
-// 
-// }
-// )
-// }    
-// 
+
 function removeListe(id) {
 
     //Liste an der Seite löschen
@@ -410,7 +369,6 @@ var header = document.getElementById("elemente");
 var btns = header.getElementsByClassName("liste");
 function markieren() {
     for (var i = 0; i < btns.length; i++) {
-        // console.log("ja");
         btns[i].addEventListener("click", function () {
             var current = document.getElementsByClassName("active");
             current[0].className = current[0].className.replace(" active", "");
@@ -419,37 +377,3 @@ function markieren() {
     }
 }
 markieren();
-/*
-function add(){
-    var newElement = document.createElement("div");
-    //newElement.textContent = "<h4>Test</h4>";
-	newElement.innerHTML = "<h4>Test</h4>";
-	newElement.className = "class1"
-    document.getElementById("items").appendChild(newElement);
-}
-
-function remove(){
-    document.querySelector("div");
-    document.getElementById("items").parentNode.removeChild("div");
-}
-*/
-/*
-var url = "http://shopping-lists-api.herokuapp.com/api/v1/liste/5da965bba83b600017fd5c0b/items/";
-var req = new XMLHttpRequest();
-req.open("POST", url, true);
-req.setRequestHeader("Content-Type", "application/json");
-
-//In JSON-Format wandeln um benötigte Parameter auszufüllen
-var data = JSON.stringify({"name": ITEM1});
-console.log(data);
-
-//Daten senden
-req.send(data);
-
-
-
-//Wenn Antwort erhalten soll diese dem Nutzer mitgeteilt werden.
-req.onreadystatechange = function()
-{
-}
-*/

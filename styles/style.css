@@ -1,5 +1,7 @@
-* {padding: 0;    margin: 0;}
-
+* {
+    padding: 0;
+    margin: 0;
+}
 body{
     background:url("background.png");
     background-size: cover;
@@ -17,7 +19,7 @@ body{
 
 menu{
     grid-area: menu;
-    background: none;  
+    background: none;
 }
 
 header{
@@ -30,6 +32,7 @@ main{
     grid-area: main;
     background-color: #EBEBEB;
 }
+
 
 #hleft{
     text-align: left;
@@ -121,6 +124,7 @@ main{
     -webkit-transition: all 0.3s ease-in-out;
 }
 
+
 #elemente{
     margin-top: 50px;
     margin-bottom: 40px;
@@ -141,7 +145,7 @@ main{
 .active  {
     padding-right: 16vw;
     background: #EBEBEB;
-    border-top-color: white;  
+    border-top-color: white;
 }
 
 #starter{
@@ -160,15 +164,12 @@ main{
 
 #begrüßung {
     margin: 30px;
-    padding: 50px;
-    margin-right: 200px;
-    
+    padding: 50px; 
 }
+
 #tutorial {
     margin: 30px;
     padding: 50px;
-    margin-right: 200px;
-   
 }
 
 #tut {
@@ -245,8 +246,7 @@ input:checked + .slider:before {
     -ms-transform: translateX(25px);
     transform: translateX(25px);
 }
-  
-  /* Rounded sliders */
+
 .slider.round {
     border-radius: 34px;
 }
@@ -293,11 +293,9 @@ input:checked + .slider:before {
     -webkit-transform: scale(1.25,1.25);
     -webkit-transition: all 0.3s ease-in-out;
 }
-
 #elemente .liste.active .trash{
     visibility: visible;
 }
-
 #elemente .liste.active:hover{
     background: #EBEBEB;
 }
@@ -315,14 +313,41 @@ input:checked + .slider:before {
     margin-top: -3px;
 }
 
+@media (min-width: 600px) and (max-width: 876px) {
+    #addlist{
+        width:100%;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .liste{
+        padding-top:20px;
+        padding-bottom:20px;
+    }
+
+    main{
+        height: 100%;
+
+    }
+    header #erstellen{
+        margin-top: -20px;
+        margin-right: 25px;
+    }
+
+    #erstellen #benutzer{
+        padding-left: 105px;
+    }
+}
+
+
 @media (max-width: 600px) {
     body {
         background-size: cover;
         display: grid;
         height: 100%;
         width: 100%;
-        grid-template-columns:20vw 80vw;
-        grid-template-rows: 13vh auto;
+        grid-template-columns:48vw 52vw;
+        grid-template-rows: 15.5vh minmax(132vh, auto);
         grid-template-areas: 
         'header header'
         'menu main';
@@ -335,12 +360,17 @@ input:checked + .slider:before {
     }
 
     header #erstellen{
-        margin-right: -75px;
+        margin-top: -20px;
+        margin-right: -175px;
+    }
+
+    #erstellen #benutzer{
+        padding-left: 105px;
     }
 
     main{
         width: 100vw;
-        height: 100vh;
+        height: 100%;
     }
 
     main #begrüßung {
@@ -359,5 +389,29 @@ input:checked + .slider:before {
 
     h1{
         font-size: 95%;
+    }
+
+    #addlist{
+        width:100%;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    #addlisttext{
+        text-align: center;
+    }
+
+    #elemente #rempic{
+        left: 130px;
+    }
+
+    #elemente .trash {
+        left: 155px;
+    }
+
+    .liste{
+        padding-top:20px;
+        padding-bottom:20px;
     }
 }
